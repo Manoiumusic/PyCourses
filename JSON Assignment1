@@ -1,0 +1,22 @@
+import urllib.request, urllib.parse, urllib.error
+import json
+
+#setup
+added = 0
+url = input('Please enter URL: ')
+
+#read and convert to unicode
+handle = urllib.request.urlopen(url)
+readdata = handle.read().decode()
+
+#parse json
+js = json.loads(readdata)
+js = js['comments']
+
+#go through list and dictionary to find values and add
+for dict in js:
+	for k, v in dict.items():
+		if k == 'count':
+			added = added + v
+			
+print(added)
